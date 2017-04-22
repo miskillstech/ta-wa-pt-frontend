@@ -101,6 +101,6 @@ $('.categori_block').parallax({
 	
 		setHeiHeight(); 
 $(window).resize( setHeiHeight ); 
-	
+	initialize();
 $scope.takeAppo="WelcomeTo TAke Appo";
 }]);
