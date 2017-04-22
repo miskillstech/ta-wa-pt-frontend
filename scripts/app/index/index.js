@@ -100,7 +100,7 @@ $('.categori_block').parallax({
 });
 	
 		setHeiHeight(); 
-$window.resize( setHeiHeight ); 
+$(window).resize( setHeiHeight ); 
 	
 $scope.takeAppo="WelcomeTo TAke Appo";
 }]);
