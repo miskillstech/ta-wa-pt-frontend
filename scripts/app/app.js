@@ -1,14 +1,21 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('takeAppo', [
   'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
+  'takeAppo.index'
+  ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
-
-  $routeProvider.otherwise({redirectTo: '/view1'});
+ $locationProvider.html5Mode(true)
+  $routeProvider.when('/', {
+    templateUrl: 'index/index.html',
+    controller: 'indexCtrl'
+  });
+ $locationProvider.html5Mode({
+  enabled: true,
+  requireBase: false
+});
+  // $locationProvider.hashPrefix('!');
+  // $routeProvider.otherwise({redirectTo: '/index'});
+  
 }]);
