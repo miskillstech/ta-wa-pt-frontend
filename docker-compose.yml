@@ -1,0 +1,15 @@
+version: '2'
+services:
+  nginx:
+    build: client
+    volumes:
+       - /gt/sc-prog-repos/sc-modelng1:/gt/sc-prog-repos/sc-modelng1
+       - /gt/sc-prog-repos/sc-modelng1/etc-supervisor-conf.d-services.conf:/etc/supervisor/conf.d/services.conf
+       - /gt/sc-prog-repos/sc-modelng1/scripts/dist:/var/www/html
+    networks:
+       - emr
+  
+networks:
+  emr:
+    external:
+      name: emr_default
