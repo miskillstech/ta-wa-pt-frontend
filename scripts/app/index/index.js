@@ -1,14 +1,16 @@
 'use strict';
 
-angular.module('takeAppo.index', ['ngRoute'])
+angular.module('takeAppo.index', ['ngRoute','ngResource'])
 // .config(['$routeProvider', function($routeProvider) {
 //   $routeProvider.when('/index', {
 //     templateUrl: 'index/index.html',
 //     controller: 'indexCtrl'
 //   });
 // }])
-.controller('indexCtrl', ['$scope','$timeout','$window',function($scope,$timeout,$window) {
-	
+.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]).controller('indexCtrl', ['$scope','$timeout','$window','waPtIndexServices',function($scope,$timeout,$window,waPtIndexServices) {
+$timeout(function(){
 new WOW().init();
 jQuery(document).ready(function() {
    "use strict";
@@ -71,9 +73,6 @@ jQuery(document).ready(function() {
   });
 }); //ready
 
-
-
-
 $('.categori_block').parallax({
 
   'elements': [
@@ -98,9 +97,36 @@ $('.categori_block').parallax({
   }
   ]
 });
-	
-		setHeiHeight(); 
+ setHeiHeight(); 
 $(window).resize( setHeiHeight ); 
-	initialize();
+  initialize();
+
+  }, 0);
+
 $scope.takeAppo="WelcomeTo TAke Appo";
-}]);
+waPtIndexServices.waPt('testPatients').testPatients({
+  
+}, function (data) {
+               console.log(data);
+            });
+
+
+}]).service("waPtIndexServices", ['$resource', '$http',
+    function($resource, $http) {
+        var factory = {};
+        factory.waPt = function (queryType) {
+          
+          
+            if (queryType == 'testPatients') {
+                var waPtRestRESTUri = waPtApiUrl + 'testPatients';
+            }
+            return $resource(waPtRestRESTUri, {},
+            {
+                testPatients: {
+                     method: "GET",
+                }
+            });
+        };
+        return factory;
+    }]);
+;

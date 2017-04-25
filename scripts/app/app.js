@@ -1,6 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
+var waPtApiUrl='http://127.0.0.1/ta-prog-repos/ta-ss-api/server/api/public/wa-pt-frontend/';
 angular.module('takeAppo', [
   'ngRoute',
   'takeAppo.index'
